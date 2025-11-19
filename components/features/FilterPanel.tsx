@@ -56,18 +56,10 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
   };
 
   const activeFiltersCount =
-    filters.topics.length +
     filters.tagCategories.length +
     filters.tagSubcategories.length +
     filters.difficulty.length +
     filters.content_type.length;
-
-  const toggleTopic = (topic: string) => {
-    const newTopics = filters.topics.includes(topic)
-      ? filters.topics.filter((t) => t !== topic)
-      : [...filters.topics, topic];
-    updateFilter('topics', newTopics);
-  };
 
   const toggleTagCategory = (category: string) => {
     const newCategories = filters.tagCategories.includes(category)
@@ -186,26 +178,6 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
               </div>
             )}
 
-            {/* Topics Filter - Labelled as Topics_Detailed */}
-            {availableOptions.topics.length > 0 && (
-              <div>
-                <label className="text-xs sm:text-sm font-medium mb-2 block">Topics_Detailed</label>
-                <div className="flex flex-wrap gap-2 max-h-32 overflow-y-auto">
-                  {availableOptions.topics.map((topic) => (
-                    <Button
-                      key={topic}
-                      variant={filters.topics.includes(topic) ? 'primary' : 'outline'}
-                      size="sm"
-                      onClick={() => toggleTopic(topic)}
-                      className="text-xs sm:text-sm"
-                    >
-                      {topic}
-                    </Button>
-                  ))}
-                </div>
-              </div>
-            )}
-
             {/* Content Type Filter */}
             {availableOptions.content_types.length > 0 && (
               <div>
@@ -259,19 +231,6 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
                     filters.tagSubcategories.filter((s) => s !== subcategory)
                   )
                 }
-                className="ml-1 hover:opacity-70"
-              >
-                <X className="w-3 h-3" />
-              </button>
-            </Badge>
-          ))}
-          {filters.topics.map((topic) => (
-            <Badge key={topic} variant="secondary" className="flex items-center gap-1 text-xs sm:text-sm">
-              <span className="hidden sm:inline">Topics_Detailed: </span>
-              <span className="sm:hidden">Topic: </span>
-              {topic}
-              <button
-                onClick={() => updateFilter('topics', filters.topics.filter((t) => t !== topic))}
                 className="ml-1 hover:opacity-70"
               >
                 <X className="w-3 h-3" />
