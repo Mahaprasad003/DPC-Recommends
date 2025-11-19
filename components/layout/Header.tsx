@@ -15,6 +15,7 @@ export function Header() {
   const { user, signOut, signIn, signUp, isAuthenticated } = useAuth();
 
   const openLoginModal = React.useCallback((mode: 'signin' | 'signup') => {
+    console.log('Opening login modal with mode:', mode);
     setLoginMode(mode);
     setLoginModalOpen(true);
   }, []);
@@ -55,16 +56,16 @@ export function Header() {
   if (!mounted) {
     return (
       <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
+        <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+          <div className="flex h-14 sm:h-16 items-center justify-between">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
                 {/* Placeholder for logo PNG */}
               </div>
-              <h1 className="text-lg font-semibold">DataPeCharcha Recommends</h1>
+              <h1 className="text-sm sm:text-base md:text-lg font-semibold">DataPeCharcha Recommends</h1>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-9 h-9" />
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <div className="w-8 sm:w-9 h-8 sm:h-9" />
             </div>
           </div>
         </div>
@@ -74,11 +75,11 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+        <div className="flex h-14 sm:h-16 items-center justify-between gap-2">
           {/* Logo and Brand */}
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
               <Image 
                 src="/logo.png" 
                 alt="DataPeCharcha Logo" 
@@ -87,11 +88,11 @@ export function Header() {
                 className="w-full h-full object-contain" 
               />
             </div>
-            <h1 className="text-lg font-semibold">DataPeCharcha Recommends</h1>
+            <h1 className="text-sm sm:text-base md:text-lg font-semibold truncate">DataPeCharcha Recommends</h1>
           </div>
 
           {/* Right Side Actions */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3 flex-shrink-0">
             {isAuthenticated ? (
               <>
                 <div className="hidden sm:flex items-center gap-2 text-sm text-muted-foreground">
@@ -102,9 +103,9 @@ export function Header() {
                   variant="outline"
                   size="sm"
                   onClick={handleSignOut}
-                  className="whitespace-nowrap"
+                  className="whitespace-nowrap text-xs sm:text-sm h-8 sm:h-9 px-2 sm:px-3 touch-manipulation"
                 >
-                  <LogOut className="w-4 h-4 sm:mr-2" />
+                  <LogOut className="w-3.5 h-3.5 sm:w-4 sm:h-4 sm:mr-2" />
                   <span className="hidden sm:inline">Sign Out</span>
                 </Button>
               </>
@@ -114,19 +115,17 @@ export function Header() {
                   variant="ghost"
                   size="sm"
                   onClick={() => openLoginModal('signin')}
-                  className="whitespace-nowrap"
+                  className="whitespace-nowrap text-xs sm:text-sm h-8 sm:h-9 px-2 sm:px-3 touch-manipulation"
                 >
-                  <span className="hidden sm:inline">Sign In</span>
-                  <span className="sm:hidden">Sign In</span>
+                  Sign In
                 </Button>
                 <Button
                   variant="primary"
                   size="sm"
                   onClick={() => openLoginModal('signup')}
-                  className="whitespace-nowrap"
+                  className="whitespace-nowrap text-xs sm:text-sm h-8 sm:h-9 px-2 sm:px-3 touch-manipulation"
                 >
-                  <span className="hidden sm:inline">Sign Up</span>
-                  <span className="sm:hidden">Sign Up</span>
+                  Sign Up
                 </Button>
               </>
             )}
@@ -134,13 +133,13 @@ export function Header() {
               variant="ghost" 
               size="sm" 
               onClick={toggleTheme} 
-              className="flex-shrink-0"
+              className="flex-shrink-0 h-8 sm:h-9 w-8 sm:w-9 p-0 touch-manipulation"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? (
-                <Sun className="w-4 h-4" />
+                <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               ) : (
-                <Moon className="w-4 h-4" />
+                <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               )}
             </Button>
           </div>

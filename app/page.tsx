@@ -92,18 +92,18 @@ export default function HomePage() {
         />
 
         {/* Sneak Peek Section */}
-        <div className="space-y-6">
-          <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-2">Sneak Peek</h2>
-            <p className="text-muted-foreground">
+        <div className="space-y-4 sm:space-y-6">
+          <div className="text-center px-2">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1.5 sm:mb-2">Sneak Peek</h2>
+            <p className="text-sm sm:text-base text-muted-foreground">
               Here&apos;s a preview of what you&apos;ll get access to after signing in
             </p>
           </div>
 
           {/* Content Coverage Box */}
-          <div className="max-w-3xl mx-auto">
-            <div className="p-6 rounded-lg border bg-card/50 backdrop-blur-sm">
-              <p className="text-center text-sm sm:text-base text-muted-foreground">
+          <div className="max-w-3xl mx-auto px-2">
+            <div className="p-4 sm:p-6 rounded-lg border bg-card/50 backdrop-blur-sm">
+              <p className="text-center text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed">
                 <span className="font-semibold text-foreground">Comprehensive coverage:</span> Classical ML, Deep Learning, Agents, LLMs, MCP, and much more from{' '}
                 <span className="font-semibold text-foreground">well-reputed sources</span>
               </p>
@@ -136,11 +136,11 @@ export default function HomePage() {
           )}
 
           {/* Bottom CTA */}
-          <div className="text-center pt-8 pb-4">
-            <p className="text-muted-foreground mb-2">
+          <div className="text-center pt-6 sm:pt-8 pb-3 sm:pb-4 px-2">
+            <p className="text-sm sm:text-base text-muted-foreground mb-1.5 sm:mb-2">
               Want to see all 300+ resources with full search and filtering?
             </p>
-            <p className="text-sm text-muted-foreground mb-4">
+            <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">
               Plus get access to our{' '}
               <a 
                 href="https://datapecharcha.substack.com/" 
@@ -151,14 +151,14 @@ export default function HomePage() {
                 free high-value newsletter
               </a>
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center max-w-md mx-auto">
               <Button
                 variant="primary"
                 size="lg"
                 onClick={() => {
                   window.dispatchEvent(new CustomEvent('openLoginModal', { detail: { mode: 'signup' } }));
                 }}
-                className="px-8"
+                className="w-full sm:w-auto px-6 sm:px-8 h-11 sm:h-12 text-sm sm:text-base touch-manipulation"
               >
                 Sign Up Free
               </Button>
@@ -168,7 +168,7 @@ export default function HomePage() {
                 onClick={() => {
                   window.dispatchEvent(new CustomEvent('openLoginModal', { detail: { mode: 'signin' } }));
                 }}
-                className="px-8"
+                className="w-full sm:w-auto px-6 sm:px-8 h-11 sm:h-12 text-sm sm:text-base touch-manipulation"
               >
                 Sign In
               </Button>
@@ -181,12 +181,12 @@ export default function HomePage() {
 
   // Show full content with filters for authenticated users
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Search and Filter Section */}
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
 
         {/* Search and Sort */}
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4">
           <div className="flex-1 min-w-0">
             <SearchBar value={searchQuery} onChange={setSearchQuery} />
           </div>
@@ -196,14 +196,14 @@ export default function HomePage() {
               onChange={(e) =>
                 setSortBy(e.target.value as 'date_added' | 'rating' | 'title' | 'difficulty')
               }
-              className="w-full sm:w-40 text-sm"
+              className="w-full sm:w-36 md:w-40 text-xs sm:text-sm h-10 sm:h-11"
             >
               <option value="date_added">Date Added</option>
               <option value="rating">Rating</option>
               <option value="title">Title</option>
               <option value="difficulty">Difficulty</option>
             </Select>
-            <Button variant="outline" onClick={toggleSortOrder} className="flex-shrink-0">
+            <Button variant="outline" onClick={toggleSortOrder} className="flex-shrink-0 h-10 sm:h-11 px-2.5 sm:px-3 touch-manipulation">
               <ArrowUpDown className="w-4 h-4 sm:mr-2" />
               <span className="hidden sm:inline">{sortOrder === 'asc' ? 'Asc' : 'Desc'}</span>
             </Button>
