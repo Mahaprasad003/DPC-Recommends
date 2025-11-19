@@ -33,6 +33,28 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSignUp, onSignIn }) 
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-muted/20" />
       
+      {/* Aesthetic mesh grid with gradient */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(120, 119, 198, 0.2) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(120, 119, 198, 0.2) 1px, transparent 1px)
+          `,
+          backgroundSize: '50px 50px',
+          maskImage: 'radial-gradient(ellipse 80% 60% at 50% 40%, black, transparent)',
+          WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at 50% 40%, black, transparent)'
+        }}
+      />
+      
+      {/* Gradient overlay on mesh */}
+      <div 
+        className="absolute inset-0 opacity-30"
+        style={{
+          background: 'radial-gradient(ellipse 80% 60% at 50% 40%, rgba(120, 119, 198, 0.15), rgba(147, 51, 234, 0.1), transparent)'
+        }}
+      />
+      
       <div className="relative max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-24">
         {/* Main Hero Content */}
         <div className="text-center">
