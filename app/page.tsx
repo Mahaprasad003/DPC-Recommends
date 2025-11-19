@@ -96,7 +96,7 @@ export default function HomePage() {
           <div className="text-center">
             <h2 className="text-2xl sm:text-3xl font-bold mb-2">Sneak Peek</h2>
             <p className="text-muted-foreground">
-              Here's a preview of what you'll get access to after signing in
+              Here&apos;s a preview of what you&apos;ll get access to after signing in
             </p>
           </div>
 
