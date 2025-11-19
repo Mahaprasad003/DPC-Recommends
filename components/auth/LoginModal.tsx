@@ -88,17 +88,17 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSignI
         setLoading(false);
       } else {
         if (mode === 'signup') {
-          // Show success message for signup (email confirmation might be required)
-          setSuccessMessage('Account created successfully! Please check your email to confirm your account, then sign in.');
+          // Show success message for signup (email confirmation required)
+          setSuccessMessage(`Account created! We've sent a verification email to ${email}. Please check your inbox and click the verification link to activate your account, then sign in here.`);
           setEmail('');
           setPassword('');
           setLoading(false);
-          // Switch to signin mode after a brief delay to let user see the message
+          // Switch to signin mode after user has time to read the message
           const id = setTimeout(() => {
             setMode('signin');
             setSuccessMessage(null);
             setTimeoutId(null);
-          }, 3000);
+          }, 5000);
           setTimeoutId(id);
         } else {
           // Sign in successful
