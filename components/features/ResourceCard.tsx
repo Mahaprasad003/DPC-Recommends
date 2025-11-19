@@ -16,8 +16,18 @@ interface ResourceCardProps {
 export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuery }) => {
   const handleCardClick = () => {
     if (resource.url) {
-      window.open(resource.url, '_blank', 'noopener,noreferrer');
+      const url = ensureProtocol(resource.url);
+      window.open(url, '_blank', 'noopener,noreferrer');
     }
+  };
+
+  const ensureProtocol = (url: string) => {
+    if (!url) return url;
+    // If URL doesn't start with http:// or https://, add https://
+    if (!/^https?:\/\//i.test(url)) {
+      return `https://${url}`;
+    }
+    return url;
   };
 
   const highlightText = (text: string, query?: string) => {
@@ -53,7 +63,10 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
     >
       <CardHeader className="pb-3 px-4 sm:px-6 pt-4 sm:pt-6">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="text-base sm:text-lg font-semibold line-clamp-2 group-hover:text-primary transition-colors flex-1 min-w-0">
+          <h3 
+            className="text-base sm:text-lg font-semibold line-clamp-2 group-hover:text-primary transition-colors flex-1 min-w-0"
+            title={resource.title}
+          >
             {searchQuery ? highlightText(resource.title, searchQuery) : resource.title}
           </h3>
           <ExternalLink className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-1" />
@@ -66,7 +79,7 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
           <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
             <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
             <a 
-              href={resource.url} 
+              href={ensureProtocol(resource.url)} 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-blue-600 dark:text-blue-400 hover:underline truncate min-w-0"

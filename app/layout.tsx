@@ -4,6 +4,7 @@ import './globals.css';
 import { Providers } from './providers';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { AdminPanelWrapper } from '@/components/admin/AdminPanelWrapper';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
               </div>
             </main>
             <Footer />
+            <AdminPanelWrapper />
           </div>
         </Providers>
       </body>
