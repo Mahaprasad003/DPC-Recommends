@@ -3,8 +3,22 @@ import Link from 'next/link';
 
 export function Footer() {
   return (
-    <footer className="border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+    <footer className="relative border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      {/* Subtle mesh grid */}
+      <div 
+        className="absolute inset-0 opacity-[0.30]"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(120, 119, 198, 0.3) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(120, 119, 198, 0.3) 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px',
+          maskImage: 'linear-gradient(to top, black 20%, transparent 80%)',
+          WebkitMaskImage: 'linear-gradient(to top, black 20%, transparent 80%)'
+        }}
+      />
+      
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-6">
           {/* Co-authors Section */}
           <div>
