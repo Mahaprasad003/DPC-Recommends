@@ -24,6 +24,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSignI
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [hasInitialized, setHasInitialized] = useState(false);
 
   // Ensure we're mounted (client-side only) for portal
   useEffect(() => {
@@ -32,22 +33,25 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSignI
 
   // Update mode when initialMode changes (when modal opens with different mode)
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && !hasInitialized) {
+      // Only reset on initial open, not when state updates
       setMode(initialMode);
       setError(null);
       setSuccessMessage(null);
       setEmail('');
       setPassword('');
-      setSubscribeNewsletter(true); // Reset to checked by default
-      setLoading(false); // Reset loading state
-    } else {
+      setSubscribeNewsletter(true);
+      setLoading(false);
+      setHasInitialized(true);
+    } else if (!isOpen) {
       // Clear any pending timeout when modal closes
       if (timeoutId) {
         clearTimeout(timeoutId);
         setTimeoutId(null);
       }
+      setHasInitialized(false);
     }
-  }, [isOpen, initialMode, timeoutId]);
+  }, [isOpen, initialMode, timeoutId, hasInitialized]);
 
   // Debug: Log when modal should be visible
   useEffect(() => {
