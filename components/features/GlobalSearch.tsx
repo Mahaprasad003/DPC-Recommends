@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { Search, X, ArrowRight } from 'lucide-react';
 import { Input } from '@/components/ui/Input';
@@ -73,12 +73,12 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({ isOpen, onClose }) =
       }).slice(0, 10) // Limit to 10 results
     : [];
 
-  const handleResourceClick = (resource: Resource) => {
+  const handleResourceClick = useCallback((resource: Resource) => {
     if (resource.url) {
       window.open(resource.url, '_blank');
       onClose();
     }
-  };
+  }, [onClose]);
 
   // Handle arrow keys and Enter
   useEffect(() => {
@@ -101,7 +101,7 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({ isOpen, onClose }) =
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, selectedIndex, filteredResources]);
+  }, [isOpen, selectedIndex, filteredResources, handleResourceClick]);
 
   // Scroll selected item into view
   useEffect(() => {
@@ -173,7 +173,7 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({ isOpen, onClose }) =
           ) : filteredResources.length === 0 ? (
             <div className="p-6 sm:p-8 text-center bg-background">
               <p className="text-sm sm:text-base text-muted-foreground mb-2">
-                No results found for "{searchQuery}"
+                No results found for &ldquo;{searchQuery}&rdquo;
               </p>
               <p className="text-xs sm:text-sm text-muted-foreground">
                 Try a different search term or browse all resources

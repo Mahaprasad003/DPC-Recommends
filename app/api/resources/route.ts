@@ -3,6 +3,9 @@ import { createClient } from '@supabase/supabase-js';
 import { unstable_cache } from 'next/cache';
 import { Resource, FilterOptions } from '@/types/database';
 
+// Mark as dynamic since we use searchParams
+export const dynamic = 'force-dynamic';
+
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 

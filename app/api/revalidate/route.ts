@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidateTag } from 'next/cache';
 
+// Mark as dynamic since we use searchParams
+export const dynamic = 'force-dynamic';
+
 /**
  * API route to manually revalidate cache when database is updated
  * 
