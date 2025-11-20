@@ -2,11 +2,16 @@
 
 import { useEffect, useState } from 'react';
 import { X } from 'lucide-react';
+import { useAuth } from '@/lib/hooks/useAuth';
 
 export function SearchShortcutHint() {
   const [show, setShow] = useState(false);
+  const { isAuthenticated, loading } = useAuth();
 
   useEffect(() => {
+    // Only show for authenticated users
+    if (!isAuthenticated || loading) return;
+
     // Check if user has seen the hint before
     const hasSeenHint = localStorage.getItem('hasSeenSearchHint');
     
@@ -18,7 +23,7 @@ export function SearchShortcutHint() {
 
       return () => clearTimeout(timer);
     }
-  }, []);
+  }, [isAuthenticated, loading]);
 
   const handleDismiss = () => {
     setShow(false);
