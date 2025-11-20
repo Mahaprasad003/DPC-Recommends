@@ -182,28 +182,46 @@ export default function HomePage() {
   // Show full content with filters for authenticated users
   return (
     <div className="space-y-4 sm:space-y-6">
-      {/* Search and Filter Section */}
-      <div className="space-y-3 sm:space-y-4">
+      {/* Search Bar - Full Width */}
+      <div>
+        <SearchBar value={searchQuery} onChange={setSearchQuery} />
+      </div>
 
-        {/* Search and Sort */}
-        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4">
-          <div className="flex-1 min-w-0">
-            <SearchBar value={searchQuery} onChange={setSearchQuery} />
-          </div>
-          <div className="flex gap-2 flex-shrink-0">
+      {/* Sort Controls and Filters */}
+      <div className="space-y-3 sm:space-y-4">
+        {/* Sort Controls - Separate Line */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pb-3 sm:pb-4 border-b">
+          {/* Results Count */}
+          {!isLoading && resources && (
+            <p className="text-sm text-muted-foreground">
+              Showing {resources.length} resource{resources.length !== 1 ? 's' : ''}
+            </p>
+          )}
+          
+          {/* Sort Controls */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            <label htmlFor="sort-by" className="text-sm font-medium whitespace-nowrap">
+              Sort by:
+            </label>
             <Select
+              id="sort-by"
               value={sortBy}
               onChange={(e) =>
                 setSortBy(e.target.value as 'date_added' | 'rating' | 'title' | 'difficulty')
               }
-              className="w-full sm:w-36 md:w-40 text-xs sm:text-sm h-10 sm:h-11"
+              className="w-32 sm:w-36 text-xs sm:text-sm h-10"
             >
               <option value="date_added">Date Added</option>
               <option value="rating">Rating</option>
               <option value="title">Title</option>
               <option value="difficulty">Difficulty</option>
             </Select>
-            <Button variant="outline" onClick={toggleSortOrder} className="flex-shrink-0 h-10 sm:h-11 px-2.5 sm:px-3 touch-manipulation">
+            <Button 
+              variant="outline" 
+              onClick={toggleSortOrder} 
+              className="h-10 px-3 touch-manipulation"
+              aria-label={`Sort order: ${sortOrder === 'asc' ? 'Ascending' : 'Descending'}`}
+            >
               <ArrowUpDown className="w-4 h-4 sm:mr-2" />
               <span className="hidden sm:inline">{sortOrder === 'asc' ? 'Asc' : 'Desc'}</span>
             </Button>
@@ -219,13 +237,6 @@ export default function HomePage() {
           />
         )}
       </div>
-
-      {/* Results Count */}
-      {!isLoading && resources && (
-        <div className="text-sm text-muted-foreground">
-          Showing {resources.length} resource{resources.length !== 1 ? 's' : ''}
-        </div>
-      )}
 
       {/* Error State */}
       {error && (

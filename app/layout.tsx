@@ -5,6 +5,7 @@ import { Providers } from './providers';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { AdminPanelWrapper } from '@/components/admin/AdminPanelWrapper';
+import { SearchShortcutHint } from '@/components/features/SearchShortcutHint';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -31,6 +32,7 @@ export default function RootLayout({
             </main>
             <Footer />
             <AdminPanelWrapper />
+            <SearchShortcutHint />
           </div>
         </Providers>
       </body>
