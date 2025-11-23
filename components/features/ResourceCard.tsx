@@ -87,7 +87,7 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
 
   return (
     <Card
-      className="h-full cursor-pointer transition-all hover:shadow-lg hover:scale-[1.02] group relative flex flex-col"
+      className="h-full cursor-pointer transition-all hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] group relative flex flex-col"
       onClick={handleCardClick}
     >
       {/* Bookmark Button - Top Right Corner */}
@@ -95,15 +95,19 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
         <button
           onClick={handleBookmarkClick}
           className={`
-            absolute top-2 right-2 z-10 p-1.5 rounded-full
+            absolute top-2 right-2 z-10 
+            w-7 h-7 sm:w-8 sm:h-8
+            flex items-center justify-center
+            rounded-full
             transition-all duration-300 transform
             ${bookmarked
               ? 'bg-primary/90 hover:bg-primary text-primary-foreground scale-100' 
-              : 'bg-white/90 dark:bg-gray-800/90 text-gray-600 dark:text-gray-400 hover:scale-110 hover:text-primary'
+              : 'bg-white/90 dark:bg-gray-800/90 text-gray-600 dark:text-gray-400 hover:scale-110 hover:text-primary active:scale-95'
             }
             ${showConfirmation ? 'scale-125' : ''}
             backdrop-blur-sm shadow-md hover:shadow-lg
-            border-2 ${bookmarked ? 'border-primary/50' : 'border-gray-200 dark:border-gray-700'}
+            border ${bookmarked ? 'border-primary/50' : 'border-gray-200 dark:border-gray-700'}
+            touch-manipulation
           `}
           aria-label={bookmarked ? 'Remove bookmark' : 'Add bookmark'}
           title={bookmarked ? 'Remove bookmark' : 'Add bookmark'}
@@ -118,25 +122,25 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
         </button>
       )}
       
-      <CardHeader className="pb-2 px-3 sm:px-4 pt-3 sm:pt-4 pr-12 sm:pr-14">
+      <CardHeader className="pb-2 px-3 sm:px-4 pt-3 sm:pt-4 pr-11 sm:pr-12">
         <h3 
-          className="text-sm sm:text-base font-semibold line-clamp-3 group-hover:text-primary transition-colors leading-snug"
+          className="text-sm sm:text-base font-semibold line-clamp-2 sm:line-clamp-3 group-hover:text-primary transition-colors leading-tight sm:leading-snug"
           title={resource.title}
         >
           {searchQuery ? highlightText(resource.title, searchQuery) : resource.title}
         </h3>
       </CardHeader>
       
-      <CardContent className="space-y-2 sm:space-y-2.5 px-3 sm:px-4 pb-3 sm:pb-4 flex-1 flex flex-col">
+      <CardContent className="space-y-2 px-3 sm:px-4 pb-3 sm:pb-4 flex-1 flex flex-col pr-11 sm:pr-4">
         {/* URL */}
         {resource.url && (
-          <div className="flex items-center gap-1.5 sm:gap-2 text-xs text-muted-foreground min-h-[20px]">
-            <ExternalLink className="w-3 h-3 flex-shrink-0" />
+          <div className="flex items-start gap-1.5 text-xs text-muted-foreground">
+            <ExternalLink className="w-3 h-3 flex-shrink-0 mt-0.5" />
             <a 
               href={ensureProtocol(resource.url)} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-blue-600 dark:text-blue-400 hover:underline truncate min-w-0"
+              className="text-blue-600 dark:text-blue-400 hover:underline break-all line-clamp-1 min-w-0 touch-manipulation"
               onClick={(e) => e.stopPropagation()}
             >
               {resource.url}
@@ -146,20 +150,20 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
 
         {/* Source */}
         {resource.source && (
-          <div className="flex items-center gap-1.5 sm:gap-2 text-xs text-muted-foreground min-h-[20px]">
-            <Building2 className="w-3 h-3 flex-shrink-0" />
-            <span className="truncate">{resource.source}</span>
+          <div className="flex items-start gap-1.5 text-xs text-muted-foreground">
+            <Building2 className="w-3 h-3 flex-shrink-0 mt-0.5" />
+            <span className="break-words line-clamp-1">{resource.source}</span>
           </div>
         )}
 
         <div className="flex-1"></div>
 
         {/* Difficulty & Topics Container */}
-        <div className="space-y-2 pt-1">
+        <div className="space-y-1.5 sm:space-y-2 pt-1">
           {/* Difficulty */}
           {resource.difficulty && (
             <div>
-              <span className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium border ${
+              <span className={`inline-flex items-center px-2 py-0.5 rounded text-[11px] sm:text-xs font-medium border ${
                 getDifficultyColor(resource.difficulty) === 'success' 
                   ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800'
                   : getDifficultyColor(resource.difficulty) === 'warning'
@@ -181,7 +185,7 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
               {resource.topics.slice(0, 3).map((topic, index) => (
                 <span
                   key={index}
-                  className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-300 dark:border-blue-800"
+                  className="inline-flex items-center px-2 py-0.5 rounded text-[11px] sm:text-xs font-medium bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-300 dark:border-blue-800"
                   title={String(topic)}
                 >
                   {String(topic)}
@@ -189,7 +193,7 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
               ))}
               {resource.topics.length > 3 && (
                 <span 
-                  className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 cursor-help"
+                  className="inline-flex items-center px-2 py-0.5 rounded text-[11px] sm:text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 cursor-help"
                   title={resource.topics.slice(3).join(', ')}
                 >
                   +{resource.topics.length - 3}
