@@ -2,12 +2,14 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
-import { Moon, Sun, LogIn, LogOut, User } from 'lucide-react';
+import { Moon, Sun, LogIn, LogOut, User, Bookmark } from 'lucide-react';
 import { useAuth } from '@/lib/hooks/useAuth';
 import { LoginModal } from '@/components/auth/LoginModal';
 
 export function Header() {
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [loginModalOpen, setLoginModalOpen] = useState(false);
@@ -99,6 +101,16 @@ export function Header() {
                   <User className="w-4 h-4" />
                   <span className="truncate max-w-[150px]">{user?.email}</span>
                 </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => router.push('/bookmarks')}
+                  className="whitespace-nowrap text-xs sm:text-sm h-8 sm:h-9 px-2 sm:px-3 touch-manipulation"
+                  aria-label="View bookmarks"
+                >
+                  <Bookmark className="w-3.5 h-3.5 sm:w-4 sm:h-4 sm:mr-2" />
+                  <span className="hidden sm:inline">Bookmarks</span>
+                </Button>
                 <Button
                   variant="outline"
                   size="sm"

@@ -6,18 +6,27 @@ import { Search, X, ArrowRight } from 'lucide-react';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { useResources } from '@/lib/hooks/useResources';
+import { useBookmarks } from '@/lib/hooks/useBookmarks';
 import { Resource } from '@/types/database';
 
 interface GlobalSearchProps {
   isOpen: boolean;
   onClose: () => void;
+  scopeToBookmarks?: boolean;
 }
 
-export const GlobalSearch: React.FC<GlobalSearchProps> = ({ isOpen, onClose }) => {
+export const GlobalSearch: React.FC<GlobalSearchProps> = ({ isOpen, onClose, scopeToBookmarks = false }) => {
   const [mounted, setMounted] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const { data: resources = [], isLoading } = useResources();
+  const { data: resources = [], isLoading: resourcesLoading } = useResources();
+  const { bookmarks, isLoading: bookmarksLoading } = useBookmarks();
+
+  // Use bookmarks or all resources based on scope
+  const isLoading = scopeToBookmarks ? bookmarksLoading : resourcesLoading;
+  const searchableResources: Resource[] = scopeToBookmarks 
+    ? bookmarks.map(b => b.resource).filter(Boolean) as Resource[]
+    : resources;
 
   useEffect(() => {
     setMounted(true);
@@ -53,25 +62,27 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({ isOpen, onClose }) =
   }, [searchQuery]);
 
   // Filter resources based on search query
-  const filteredResources = searchQuery.trim()
-    ? resources.filter((resource: Resource) => {
-        const query = searchQuery.toLowerCase();
-        const topics = Array.isArray(resource.topics) ? resource.topics : [];
-        const takeaways = Array.isArray(resource.key_takeaways) ? resource.key_takeaways : [];
-        const categories = Array.isArray(resource.tag_categories) ? resource.tag_categories : [];
-        const subcategories = Array.isArray(resource.tag_subcategories) ? resource.tag_subcategories : [];
-        
-        return (
-          resource.title?.toLowerCase().includes(query) ||
-          resource.author?.toLowerCase().includes(query) ||
-          resource.source?.toLowerCase().includes(query) ||
-          topics.some((topic: string) => topic.toLowerCase().includes(query)) ||
-          takeaways.some((takeaway: string) => takeaway.toLowerCase().includes(query)) ||
-          categories.some((cat: string) => cat.toLowerCase().includes(query)) ||
-          subcategories.some((subcat: string) => subcat.toLowerCase().includes(query))
-        );
-      }).slice(0, 10) // Limit to 10 results
-    : [];
+  const filteredResources = React.useMemo(() => {
+    return searchQuery.trim()
+      ? searchableResources.filter((resource: Resource) => {
+          const query = searchQuery.toLowerCase();
+          const topics = Array.isArray(resource.topics) ? resource.topics : [];
+          const takeaways = Array.isArray(resource.key_takeaways) ? resource.key_takeaways : [];
+          const categories = Array.isArray(resource.tag_categories) ? resource.tag_categories : [];
+          const subcategories = Array.isArray(resource.tag_subcategories) ? resource.tag_subcategories : [];
+          
+          return (
+            resource.title?.toLowerCase().includes(query) ||
+            resource.author?.toLowerCase().includes(query) ||
+            resource.source?.toLowerCase().includes(query) ||
+            topics.some((topic: string) => topic.toLowerCase().includes(query)) ||
+            takeaways.some((takeaway: string) => takeaway.toLowerCase().includes(query)) ||
+            categories.some((cat: string) => cat.toLowerCase().includes(query)) ||
+            subcategories.some((subcat: string) => subcat.toLowerCase().includes(query))
+          );
+        }).slice(0, 10) // Limit to 10 results
+      : [];
+  }, [searchQuery, searchableResources]);
 
   const handleResourceClick = useCallback((resource: Resource) => {
     if (resource.url) {
@@ -132,7 +143,7 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({ isOpen, onClose }) =
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search 300+ resources..."
+            placeholder={scopeToBookmarks ? "Search your bookmarks..." : "Search 300+ resources..."}
             className="pl-10 sm:pl-12 pr-10 sm:pr-12 border-0 focus-visible:ring-0 h-12 sm:h-14 text-sm sm:text-base bg-background"
             autoFocus
           />
@@ -150,7 +161,7 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({ isOpen, onClose }) =
           {!searchQuery.trim() ? (
             <div className="p-4 sm:p-8 text-center bg-background">
               <Search className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 text-muted-foreground opacity-50" />
-              <p className="text-sm sm:text-base text-muted-foreground mb-2">Start typing to search resources</p>
+              <p className="text-sm sm:text-base text-muted-foreground mb-2">{scopeToBookmarks ? 'Start typing to search your bookmarks' : 'Start typing to search resources'}</p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-xs sm:text-sm text-muted-foreground mt-3 sm:mt-4">
                 <span className="hidden sm:inline">Try searching for:</span>
                 <div className="flex flex-wrap items-center justify-center gap-2">
@@ -176,7 +187,7 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({ isOpen, onClose }) =
                 No results found for &ldquo;{searchQuery}&rdquo;
               </p>
               <p className="text-xs sm:text-sm text-muted-foreground">
-                Try a different search term or browse all resources
+                {scopeToBookmarks ? 'Try a different search term' : 'Try a different search term or browse all resources'}
               </p>
             </div>
           ) : (

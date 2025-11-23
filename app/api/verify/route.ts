@@ -1,10 +1,12 @@
 import { NextResponse } from 'next/server';
-import { supabaseServer } from '@/lib/supabase/server';
+import { createClient } from '@/lib/supabase/server';
 
 export async function GET() {
   try {
+    const supabase = createClient();
+    
     // Test connection
-    const { data, error } = await supabaseServer
+    const { data, error } = await supabase
       .from('technical_content')
       .select('*')
       .limit(1);
@@ -21,7 +23,7 @@ export async function GET() {
     }
 
     // Get sample data to check schema
-    const { data: sampleData } = await supabaseServer
+    const { data: sampleData } = await supabase
       .from('technical_content')
       .select('*')
       .limit(1);
@@ -29,7 +31,7 @@ export async function GET() {
     const columnCount = sampleData && sampleData.length > 0 ? Object.keys(sampleData[0]).length : 0;
 
     // Get row count
-    const { count } = await supabaseServer
+    const { count } = await supabase
       .from('technical_content')
       .select('*', { count: 'exact', head: true });
 

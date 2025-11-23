@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { Input } from '@/components/ui/Input';
 import { Search, X } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
@@ -18,6 +19,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   placeholder = 'Search resources...',
 }) => {
   const [isGlobalSearchOpen, setIsGlobalSearchOpen] = useState(false);
+  const pathname = usePathname();
+  const isBookmarksPage = pathname === '/bookmarks';
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -72,7 +75,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         </div>
       </div>
       
-      <GlobalSearch isOpen={isGlobalSearchOpen} onClose={() => setIsGlobalSearchOpen(false)} />
+      <GlobalSearch isOpen={isGlobalSearchOpen} onClose={() => setIsGlobalSearchOpen(false)} scopeToBookmarks={isBookmarksPage} />
     </>
   );
 };

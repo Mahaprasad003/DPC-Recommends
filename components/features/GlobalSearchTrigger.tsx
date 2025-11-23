@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, createContext, useContext } from 'react';
+import { usePathname } from 'next/navigation';
 import { Search } from 'lucide-react';
 import { GlobalSearch } from './GlobalSearch';
 
@@ -14,6 +15,8 @@ let keyboardListenerAttached = false;
 
 export const GlobalSearchTrigger: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const isBookmarksPage = pathname === '/bookmarks';
 
   useEffect(() => {
     // Prevent multiple keyboard listeners
@@ -63,7 +66,7 @@ export const GlobalSearchTrigger: React.FC = () => {
       </button>
 
       {/* Only render one instance of the modal */}
-      {isOpen && <GlobalSearch isOpen={isOpen} onClose={() => setIsOpen(false)} />}
+      {isOpen && <GlobalSearch isOpen={isOpen} onClose={() => setIsOpen(false)} scopeToBookmarks={isBookmarksPage} />}
     </>
   );
 };

@@ -13,11 +13,11 @@ interface CardGridProps {
 export const CardGrid: React.FC<CardGridProps> = ({ resources, searchQuery, isLoading }) => {
   if (isLoading) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
         {[...Array(8)].map((_, i) => (
           <div
             key={i}
-            className="h-64 bg-muted animate-pulse rounded-lg"
+            className="h-72 sm:h-64 bg-muted animate-pulse rounded-lg"
           />
         ))}
       </div>
@@ -26,15 +26,15 @@ export const CardGrid: React.FC<CardGridProps> = ({ resources, searchQuery, isLo
 
   if (resources.length === 0) {
     return (
-      <div className="text-center py-12">
-        <p className="text-muted-foreground text-lg">No resources found</p>
-        <p className="text-muted-foreground text-sm mt-2">
+      <div className="text-center py-8 sm:py-12 px-3">
+        <p className="text-muted-foreground text-base sm:text-lg">No resources found</p>
+        <p className="text-muted-foreground text-xs sm:text-sm mt-2">
           {searchQuery 
             ? 'Try adjusting your search or filters' 
             : 'No data available in the database. Please check:'}
         </p>
         {!searchQuery && (
-          <ul className="text-left text-sm text-muted-foreground mt-4 max-w-md mx-auto space-y-2">
+          <ul className="text-left text-xs sm:text-sm text-muted-foreground mt-4 max-w-md mx-auto space-y-2">
             <li>• Verify data exists in the technical_content table</li>
             <li>• Check RLS policies allow public read access</li>
             <li>• Visit /test-db to debug the connection</li>
@@ -45,7 +45,7 @@ export const CardGrid: React.FC<CardGridProps> = ({ resources, searchQuery, isLo
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
       {resources.map((resource) => (
         <ResourceCard
           key={resource.id}

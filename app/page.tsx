@@ -95,14 +95,14 @@ export default function HomePage() {
         <div className="space-y-4 sm:space-y-6">
           <div className="text-center px-2">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1.5 sm:mb-2">Sneak Peek</h2>
-            <p className="text-sm sm:text-base text-muted-foreground">
+            <p className="text-xs sm:text-sm md:text-base text-muted-foreground">
               Here&apos;s a preview of what you&apos;ll get access to after signing in
             </p>
           </div>
 
           {/* Content Coverage Box */}
           <div className="max-w-3xl mx-auto px-2">
-            <div className="p-4 sm:p-6 rounded-lg border bg-card/50 backdrop-blur-sm">
+            <div className="p-3 sm:p-4 md:p-6 rounded-lg border bg-card/50 backdrop-blur-sm">
               <p className="text-center text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed">
                 <span className="font-semibold text-foreground">Comprehensive coverage:</span> Classical ML, Deep Learning, Agents, LLMs, MCP, and much more from{' '}
                 <span className="font-semibold text-foreground">well-reputed sources</span>
@@ -112,7 +112,7 @@ export default function HomePage() {
 
           {/* Results Count */}
           {!sneakPeekLoading && sneakPeekContent && (
-            <div className="text-sm text-muted-foreground text-center">
+            <div className="text-xs sm:text-sm text-muted-foreground text-center">
               Showing {sneakPeekContent.length} resource{sneakPeekContent.length !== 1 ? 's' : ''} (300+ available after sign in)
             </div>
           )}
@@ -136,11 +136,11 @@ export default function HomePage() {
           )}
 
           {/* Bottom CTA */}
-          <div className="text-center pt-6 sm:pt-8 pb-3 sm:pb-4 px-2">
-            <p className="text-sm sm:text-base text-muted-foreground mb-1.5 sm:mb-2">
+          <div className="text-center pt-4 sm:pt-6 md:pt-8 pb-2 sm:pb-3 md:pb-4 px-2">
+            <p className="text-xs sm:text-sm md:text-base text-muted-foreground mb-1 sm:mb-1.5 md:mb-2">
               Want to see all 300+ resources with full search and filtering?
             </p>
-            <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">
+            <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3 md:mb-4">
               Plus get access to our{' '}
               <a 
                 href="https://datapecharcha.substack.com/" 
@@ -151,14 +151,14 @@ export default function HomePage() {
                 free high-value newsletter
               </a>
             </p>
-            <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center max-w-md mx-auto">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-2.5 md:gap-3 justify-center max-w-md mx-auto">
               <Button
                 variant="primary"
                 size="lg"
                 onClick={() => {
                   window.dispatchEvent(new CustomEvent('openLoginModal', { detail: { mode: 'signup' } }));
                 }}
-                className="w-full sm:w-auto px-6 sm:px-8 h-11 sm:h-12 text-sm sm:text-base touch-manipulation"
+                className="w-full sm:w-auto px-4 sm:px-6 md:px-8 h-10 sm:h-11 md:h-12 text-xs sm:text-sm md:text-base touch-manipulation"
               >
                 Sign Up Free
               </Button>
@@ -168,7 +168,7 @@ export default function HomePage() {
                 onClick={() => {
                   window.dispatchEvent(new CustomEvent('openLoginModal', { detail: { mode: 'signin' } }));
                 }}
-                className="w-full sm:w-auto px-6 sm:px-8 h-11 sm:h-12 text-sm sm:text-base touch-manipulation"
+                className="w-full sm:w-auto px-4 sm:px-6 md:px-8 h-10 sm:h-11 md:h-12 text-xs sm:text-sm md:text-base touch-manipulation"
               >
                 Sign In
               </Button>
@@ -190,17 +190,17 @@ export default function HomePage() {
       {/* Sort Controls and Filters */}
       <div className="space-y-3 sm:space-y-4">
         {/* Sort Controls - Separate Line */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pb-3 sm:pb-4 border-b">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 pb-3 sm:pb-4 border-b">
           {/* Results Count */}
           {!isLoading && resources && (
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Showing {resources.length} resource{resources.length !== 1 ? 's' : ''}
             </p>
           )}
           
           {/* Sort Controls */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            <label htmlFor="sort-by" className="text-sm font-medium whitespace-nowrap">
+          <div className="flex items-center gap-2">
+            <label htmlFor="sort-by" className="text-xs sm:text-sm font-medium whitespace-nowrap">
               Sort by:
             </label>
             <Select
@@ -209,7 +209,7 @@ export default function HomePage() {
               onChange={(e) =>
                 setSortBy(e.target.value as 'date_added' | 'rating' | 'title' | 'difficulty')
               }
-              className="w-32 sm:w-36 text-xs sm:text-sm h-10"
+              className="w-28 sm:w-36 text-xs sm:text-sm h-9 sm:h-10"
             >
               <option value="date_added">Date Added</option>
               <option value="rating">Rating</option>
@@ -219,11 +219,11 @@ export default function HomePage() {
             <Button 
               variant="outline" 
               onClick={toggleSortOrder} 
-              className="h-10 px-3 touch-manipulation"
+              className="h-9 sm:h-10 px-2 sm:px-3 touch-manipulation"
               aria-label={`Sort order: ${sortOrder === 'asc' ? 'Ascending' : 'Descending'}`}
             >
-              <ArrowUpDown className="w-4 h-4 sm:mr-2" />
-              <span className="hidden sm:inline">{sortOrder === 'asc' ? 'Asc' : 'Desc'}</span>
+              <ArrowUpDown className="w-4 h-4" />
+              <span className="ml-1 sm:ml-2 text-xs sm:text-sm">{sortOrder === 'asc' ? 'Asc' : 'Desc'}</span>
             </Button>
           </div>
         </div>
