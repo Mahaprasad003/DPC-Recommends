@@ -11,7 +11,7 @@ import { useAuth } from '@/lib/hooks/useAuth';
 import { FilterOptions } from '@/types/database';
 import { Select } from '@/components/ui/Select';
 import { Button } from '@/components/ui/Button';
-import { ArrowUpDown } from 'lucide-react';
+import { ArrowUpDown, LayoutGrid, List } from 'lucide-react';
 
 export default function HomePage() {
   const { isAuthenticated, loading: authLoading } = useAuth();
@@ -25,6 +25,7 @@ export default function HomePage() {
   });
   const [sortBy, setSortBy] = useState<'date_added' | 'rating' | 'title' | 'difficulty'>('title');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
   // Fetch main content for authenticated users
   const { data: resources, isLoading: resourcesLoading, error: resourcesError } = useResources({
@@ -198,8 +199,45 @@ export default function HomePage() {
             </p>
           )}
           
-          {/* Sort Controls */}
-          <div className="flex items-center gap-2">
+          {/* View Toggle and Sort Controls */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* View Mode Toggle */}
+            <div className="flex items-center gap-0.5 bg-muted/50 rounded-lg p-0.5 border">
+              <button
+                onClick={() => setViewMode('grid')}
+                className={`
+                  flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-md
+                  transition-all duration-200 text-xs sm:text-sm font-medium
+                  ${viewMode === 'grid'
+                    ? 'bg-background text-foreground shadow-sm'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-background/50'
+                  }
+                `}
+                aria-label="Grid view"
+                aria-pressed={viewMode === 'grid'}
+              >
+                <LayoutGrid className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="hidden sm:inline">Grid</span>
+              </button>
+              <button
+                onClick={() => setViewMode('list')}
+                className={`
+                  flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-md
+                  transition-all duration-200 text-xs sm:text-sm font-medium
+                  ${viewMode === 'list'
+                    ? 'bg-background text-foreground shadow-sm'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-background/50'
+                  }
+                `}
+                aria-label="List view"
+                aria-pressed={viewMode === 'list'}
+              >
+                <List className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="hidden sm:inline">List</span>
+              </button>
+            </div>
+            
+            {/* Sort Controls */}
             <label htmlFor="sort-by" className="text-xs sm:text-sm font-medium whitespace-nowrap">
               Sort by:
             </label>
@@ -249,7 +287,7 @@ export default function HomePage() {
       )}
 
       {/* Resources Grid */}
-      <CardGrid resources={displayResources} searchQuery={searchQuery} isLoading={isLoading} />
+      <CardGrid resources={displayResources} searchQuery={searchQuery} isLoading={isLoading} viewMode={viewMode} />
     </div>
   );
 }

@@ -13,10 +13,10 @@ export function Header() {
   const [mounted, setMounted] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [loginModalOpen, setLoginModalOpen] = useState(false);
-  const [loginMode, setLoginMode] = useState<'signin' | 'signup'>('signin');
+  const [loginMode, setLoginMode] = useState<'signin' | 'signup' | 'forgot-password'>('signin');
   const { user, signOut, signIn, signUp, isAuthenticated } = useAuth();
 
-  const openLoginModal = React.useCallback((mode: 'signin' | 'signup') => {
+  const openLoginModal = React.useCallback((mode: 'signin' | 'signup' | 'forgot-password') => {
     console.log('Opening login modal with mode:', mode);
     setLoginMode(mode);
     setLoginModalOpen(true);
@@ -45,7 +45,7 @@ export function Header() {
     // Listen for custom event to open login modal from hero section
     const handleOpenLoginModal = (event: CustomEvent) => {
       const mode = event.detail?.mode || 'signin';
-      openLoginModal(mode as 'signin' | 'signup');
+      openLoginModal(mode as 'signin' | 'signup' | 'forgot-password');
     };
 
     window.addEventListener('openLoginModal', handleOpenLoginModal as EventListener);

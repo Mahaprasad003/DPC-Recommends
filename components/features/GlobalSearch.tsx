@@ -66,7 +66,6 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({ isOpen, onClose, sco
     return searchQuery.trim()
       ? searchableResources.filter((resource: Resource) => {
           const query = searchQuery.toLowerCase();
-          const topics = Array.isArray(resource.topics) ? resource.topics : [];
           const takeaways = Array.isArray(resource.key_takeaways) ? resource.key_takeaways : [];
           const categories = Array.isArray(resource.tag_categories) ? resource.tag_categories : [];
           const subcategories = Array.isArray(resource.tag_subcategories) ? resource.tag_subcategories : [];
@@ -75,7 +74,6 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({ isOpen, onClose, sco
             resource.title?.toLowerCase().includes(query) ||
             resource.author?.toLowerCase().includes(query) ||
             resource.source?.toLowerCase().includes(query) ||
-            topics.some((topic: string) => topic.toLowerCase().includes(query)) ||
             takeaways.some((takeaway: string) => takeaway.toLowerCase().includes(query)) ||
             categories.some((cat: string) => cat.toLowerCase().includes(query)) ||
             subcategories.some((subcat: string) => subcat.toLowerCase().includes(query))
@@ -216,9 +214,9 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({ isOpen, onClose, sco
                         </p>
                       )}
                       <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                        {resource.topics && resource.topics.length > 0 && (
+                        {resource.tag_subcategories && resource.tag_subcategories.length > 0 && (
                           <span className="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 bg-primary/10 text-primary rounded-full">
-                            {resource.topics[0]}
+                            {resource.tag_subcategories[0]}
                           </span>
                         )}
                         {resource.difficulty && (
