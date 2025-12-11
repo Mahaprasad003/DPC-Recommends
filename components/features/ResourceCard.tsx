@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent } from '@/components/ui/Card';
+import { Card } from '@/components/ui/Card';
 import { Resource } from '@/types/database';
 import { capitalize } from '@/lib/utils/format';
 import { Bookmark, Check, ExternalLink, Building2 } from 'lucide-react';
@@ -217,7 +217,8 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
         </button>
       )}
 
-      <CardContent className="p-4 sm:p-5 flex flex-col h-full">
+      {/* Card content with explicit padding */}
+      <div className="p-4 sm:p-5 flex flex-col h-full">
         {/* Title - Hero, 2 lines max */}
         <h3
           className="font-semibold text-base sm:text-lg leading-snug group-hover:text-primary transition-colors pr-10 line-clamp-2"
@@ -226,18 +227,18 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
           {searchQuery ? highlightText(resource.title, searchQuery) : resource.title}
         </h3>
 
-        {/* Metadata with icons - stack on mobile, inline on desktop */}
-        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-xs sm:text-sm text-muted-foreground mt-2">
+        {/* Metadata with icons - constrained widths to prevent overflow */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-xs sm:text-sm text-muted-foreground mt-2 overflow-hidden">
           {domain && (
-            <span className="flex items-center gap-1.5">
-              <ExternalLink className="w-3.5 h-3.5 flex-shrink-0" />
+            <span className="flex items-center gap-1.5 min-w-0 max-w-full sm:max-w-[45%]">
+              <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5 flex-shrink-0" />
               <span className="truncate">{domain}</span>
             </span>
           )}
-          {domain && resource.source && <span className="hidden sm:inline text-muted-foreground/40">•</span>}
+          {domain && resource.source && <span className="hidden sm:inline text-muted-foreground/40 flex-shrink-0">•</span>}
           {resource.source && (
-            <span className="flex items-center gap-1.5">
-              <Building2 className="w-3.5 h-3.5 flex-shrink-0" />
+            <span className="flex items-center gap-1.5 min-w-0 max-w-full sm:max-w-[45%]">
+              <Building2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 flex-shrink-0" />
               <span className="truncate">{resource.source}</span>
             </span>
           )}
@@ -279,7 +280,7 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
             <span className="sm:hidden text-xs text-muted-foreground">+1</span>
           )}
         </div>
-      </CardContent>
+      </div>
     </Card>
   );
 };
