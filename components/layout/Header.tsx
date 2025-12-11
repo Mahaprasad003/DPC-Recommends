@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Moon, Sun, LogIn, LogOut, User, Bookmark } from 'lucide-react';
@@ -80,18 +81,18 @@ export function Header() {
       <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
         <div className="flex h-14 sm:h-16 items-center justify-between gap-2">
           {/* Logo and Brand */}
-          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          <Link href="/" className="flex items-center gap-2 sm:gap-3 min-w-0 hover:opacity-80 transition-opacity">
             <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
-              <Image 
-                src="/logo.png" 
-                alt="DataPeCharcha Logo" 
-                width={32} 
-                height={32} 
-                className="w-full h-full object-contain" 
+              <Image
+                src="/logo.png"
+                alt="DataPeCharcha Logo"
+                width={32}
+                height={32}
+                className="w-full h-full object-contain"
               />
             </div>
             <h1 className="text-sm sm:text-base md:text-lg font-semibold truncate">DataPeCharcha Recommends</h1>
-          </div>
+          </Link>
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3 flex-shrink-0">
@@ -141,10 +142,10 @@ export function Header() {
                 </Button>
               </>
             )}
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              onClick={toggleTheme} 
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleTheme}
               className="flex-shrink-0 h-8 sm:h-9 w-8 sm:w-9 p-0 touch-manipulation"
               aria-label="Toggle theme"
             >

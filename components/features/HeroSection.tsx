@@ -38,8 +38,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSignUp, onSignIn }) 
         className="absolute inset-0"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(120, 119, 198, 0.2) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(120, 119, 198, 0.2) 1px, transparent 1px)
+            linear-gradient(to right, rgba(139, 92, 246, 0.15) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(139, 92, 246, 0.15) 1px, transparent 1px)
           `,
           backgroundSize: '50px 50px',
           maskImage: 'radial-gradient(ellipse 80% 60% at 50% 40%, black, transparent)',
@@ -49,9 +49,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSignUp, onSignIn }) 
 
       {/* Gradient overlay on mesh */}
       <div
-        className="absolute inset-0 opacity-30"
+        className="absolute inset-0 opacity-40"
         style={{
-          background: 'radial-gradient(ellipse 80% 60% at 50% 40%, rgba(120, 119, 198, 0.15), rgba(147, 51, 234, 0.1), transparent)'
+          background: 'radial-gradient(ellipse 80% 60% at 50% 40%, rgba(139, 92, 246, 0.2), rgba(167, 139, 250, 0.1), transparent)'
         }}
       />
 
@@ -60,7 +60,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSignUp, onSignIn }) 
         <div className="text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 sm:mb-6">
             Discover Your Next
-            <span className="block text-primary mt-1 sm:mt-2">Technical Read</span>
+            <span
+              className="block text-primary mt-1 sm:mt-2 font-cursive text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
+              style={{ fontFamily: 'var(--font-cursive)' }}
+            >
+              Technical Read
+            </span>
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-3 sm:mb-4 px-2">

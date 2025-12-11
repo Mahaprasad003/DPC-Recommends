@@ -27,25 +27,36 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    /* Deep Space / Cosmic Theme */
+    --background: 240 20% 3.9%;
+    /* #0a0a0f - Almost black with subtle blue */
+    --foreground: 240 10% 96%;
+    /* Light gray-blue text */
+    --card: 240 18% 7%;
+    /* #12121a - Deep navy cards */
+    --card-foreground: 240 10% 96%;
+    --popover: 240 18% 7%;
+    --popover-foreground: 240 10% 96%;
+    --primary: 262 83% 58%;
+    /* #8b5cf6 - Vibrant purple */
+    --primary-foreground: 240 10% 96%;
+    --secondary: 240 15% 12%;
+    /* Slightly lighter than cards */
+    --secondary-foreground: 240 10% 96%;
+    --muted: 240 15% 15%;
+    /* Muted backgrounds */
+    --muted-foreground: 240 10% 60%;
+    /* Softer text */
+    --accent: 270 70% 60%;
+    /* Soft violet accent */
+    --accent-foreground: 240 10% 96%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 240 10% 96%;
+    --border: 240 15% 18%;
+    /* Subtle borders */
+    --input: 240 15% 15%;
+    --ring: 262 83% 58%;
+    /* Purple ring to match primary */
   }
 }
 

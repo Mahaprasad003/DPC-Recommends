@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Dancing_Script } from 'next/font/google';
 import './globals.css';
+
+const dancingScript = Dancing_Script({
+  subsets: ['latin'],
+  variable: '--font-cursive',
+  weight: ['400', '500', '600', '700'],
+});
 import { Providers } from './providers';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -20,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <body className={`${inter.className} ${dancingScript.variable}`}>
         <Providers>
           <div className="flex min-h-screen flex-col">
             <Header />

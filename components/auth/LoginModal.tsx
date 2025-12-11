@@ -74,7 +74,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSignI
   const handleGoogleSignIn = async () => {
     setError(null);
     setLoading(true);
-    
+
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
@@ -82,7 +82,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSignI
           redirectTo: `${window.location.origin}/auth/callback`,
         },
       });
-      
+
       if (error) {
         setError(error.message);
         setLoading(false);
@@ -142,10 +142,10 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSignI
     setLoading(true);
 
     try {
-      const result = mode === 'signin' 
+      const result = mode === 'signin'
         ? await onSignIn(email, password)
         : await onSignUp(email, password);
-      
+
       if (result.error) {
         setError(result.error.message || `Failed to ${mode === 'signin' ? 'sign in' : 'sign up'}. Please check your credentials.`);
         setLoading(false);
@@ -181,12 +181,12 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSignI
   };
 
   const modalContent = (
-    <div 
+    <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-2 sm:p-4 overflow-y-auto"
       onClick={handleClose}
     >
-      <div 
-        className="bg-background border rounded-lg shadow-lg w-full max-w-[95vw] sm:max-w-md my-auto p-3 sm:p-6 relative max-h-[95vh] sm:max-h-[90vh] overflow-y-auto" 
+      <div
+        className="bg-background border rounded-lg shadow-lg w-full max-w-[95vw] sm:max-w-md my-auto p-3 sm:p-6 relative max-h-[95vh] sm:max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -215,11 +215,10 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSignI
               type="button"
               onClick={() => handleModeSwitch('signin')}
               disabled={loading}
-              className={`flex-1 px-3 sm:px-4 py-2.5 sm:py-2 text-sm font-medium transition-colors disabled:opacity-50 touch-manipulation ${
-                mode === 'signin'
+              className={`flex-1 px-3 sm:px-4 py-2.5 sm:py-2 text-sm font-medium transition-colors disabled:opacity-50 touch-manipulation ${mode === 'signin'
                   ? 'border-b-2 border-primary text-primary'
                   : 'text-muted-foreground hover:text-foreground'
-              }`}
+                }`}
             >
               Sign In
             </button>
@@ -227,11 +226,10 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSignI
               type="button"
               onClick={() => handleModeSwitch('signup')}
               disabled={loading}
-              className={`flex-1 px-3 sm:px-4 py-2.5 sm:py-2 text-sm font-medium transition-colors disabled:opacity-50 touch-manipulation ${
-                mode === 'signup'
+              className={`flex-1 px-3 sm:px-4 py-2.5 sm:py-2 text-sm font-medium transition-colors disabled:opacity-50 touch-manipulation ${mode === 'signup'
                   ? 'border-b-2 border-primary text-primary'
                   : 'text-muted-foreground hover:text-foreground'
-              }`}
+                }`}
             >
               Sign Up
             </button>
@@ -379,7 +377,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSignI
               disabled={loading}
               className="flex-1 text-sm sm:text-base h-10 sm:h-11 touch-manipulation"
             >
-              {loading 
+              {loading
                 ? (mode === 'signin' ? 'Signing in...' : mode === 'signup' ? 'Signing up...' : 'Sending...')
                 : (mode === 'signin' ? 'Sign In' : mode === 'signup' ? 'Sign Up' : 'Send Reset Link')
               }

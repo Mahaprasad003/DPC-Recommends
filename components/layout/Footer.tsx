@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer className="relative border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       {/* Subtle mesh grid */}
-      <div 
+      <div
         className="absolute inset-0 opacity-[0.30]"
         style={{
           backgroundImage: `
@@ -17,7 +17,7 @@ export function Footer() {
           WebkitMaskImage: 'linear-gradient(to top, black 20%, transparent 80%)'
         }}
       />
-      
+
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-6">
           {/* Co-authors Section */}
