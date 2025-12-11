@@ -108,18 +108,18 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
               {searchQuery ? highlightText(resource.title, searchQuery) : resource.title}
             </h3>
 
-            {/* Metadata row with icons */}
+            {/* Metadata row with icons - simplified on mobile */}
             <div className="flex items-center gap-3 text-sm text-muted-foreground mt-1.5">
               {domain && (
-                <span className="flex items-center gap-1.5">
-                  <ExternalLink className="w-3.5 h-3.5" />
+                <span className="flex items-center gap-1.5 min-w-0">
+                  <ExternalLink className="w-3.5 h-3.5 flex-shrink-0" />
                   <span className="truncate">{domain}</span>
                 </span>
               )}
-              {domain && resource.source && <span className="text-muted-foreground/40">•</span>}
+              {domain && resource.source && <span className="hidden sm:inline text-muted-foreground/40">•</span>}
               {resource.source && (
-                <span className="flex items-center gap-1.5">
-                  <Building2 className="w-3.5 h-3.5" />
+                <span className="hidden sm:flex items-center gap-1.5 min-w-0">
+                  <Building2 className="w-3.5 h-3.5 flex-shrink-0" />
                   <span className="truncate">{resource.source}</span>
                 </span>
               )}
