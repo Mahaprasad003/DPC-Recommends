@@ -220,14 +220,14 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
       <CardContent className="p-4 sm:p-5 flex flex-col h-full">
         {/* Title - Hero, 2 lines max */}
         <h3
-          className="font-semibold text-base sm:text-lg leading-snug group-hover:text-primary transition-colors pr-8 line-clamp-2"
+          className="font-semibold text-base sm:text-lg leading-snug group-hover:text-primary transition-colors pr-10 line-clamp-2"
           title={resource.title}
         >
           {searchQuery ? highlightText(resource.title, searchQuery) : resource.title}
         </h3>
 
         {/* Metadata with icons - stack on mobile, inline on desktop */}
-        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-sm text-muted-foreground mt-2">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-xs sm:text-sm text-muted-foreground mt-2">
           {domain && (
             <span className="flex items-center gap-1.5">
               <ExternalLink className="w-3.5 h-3.5 flex-shrink-0" />
@@ -244,19 +244,19 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
         </div>
 
         {/* Spacer */}
-        <div className="flex-1 min-h-3" />
+        <div className="flex-1 min-h-4" />
 
         {/* Bottom: Difficulty + Tags */}
-        <div className="flex items-center gap-2 mt-4 flex-wrap">
+        <div className="flex items-center gap-2 mt-3 flex-wrap">
           {resource.difficulty && (
-            <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border ${getDifficultyStyles(resource.difficulty)}`}>
+            <span className={`inline-flex items-center px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-medium border ${getDifficultyStyles(resource.difficulty)}`}>
               {capitalize(resource.difficulty)}
             </span>
           )}
           {tags.slice(0, 1).map((tag, index) => (
             <span
               key={index}
-              className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border bg-secondary/50 text-foreground"
+              className="inline-flex items-center px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-medium border bg-secondary/50 text-foreground"
               title={String(tag)}
             >
               {truncateTag(tag)}

@@ -41,7 +41,7 @@ interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export const CardContent: React.FC<CardContentProps> = ({ className, children, ...props }) => {
   return (
-    <div className={cn('p-6 pt-0', className)} {...props}>
+    <div className={cn('p-6', className)} {...props}>
       {children}
     </div>
   );
