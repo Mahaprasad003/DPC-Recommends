@@ -14,17 +14,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSignUp, onSignIn }) 
     {
       icon: Search,
       title: 'Advanced Search',
-      description: 'Search across titles, authors, topics, and key takeaways',
+      description: 'Search titles, authors, topics, and key takeaways',
     },
     {
       icon: Filter,
       title: 'Smart Filtering',
-      description: 'Filter by topics, difficulty, content type, and more',
+      description: 'Filter by topic, difficulty, content type, and more',
     },
     {
       icon: BookOpen,
       title: '300+ Resources',
-      description: 'Access a curated library of high-quality technical content',
+      description: 'A curated library of high-quality technical content',
     },
   ];
 
@@ -32,9 +32,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSignUp, onSignIn }) 
     <div className="relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-muted/20" />
-      
+
       {/* Aesthetic mesh grid with gradient */}
-      <div 
+      <div
         className="absolute inset-0"
         style={{
           backgroundImage: `
@@ -46,15 +46,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSignUp, onSignIn }) 
           WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at 50% 40%, black, transparent)'
         }}
       />
-      
+
       {/* Gradient overlay on mesh */}
-      <div 
+      <div
         className="absolute inset-0 opacity-30"
         style={{
           background: 'radial-gradient(ellipse 80% 60% at 50% 40%, rgba(120, 119, 198, 0.15), rgba(147, 51, 234, 0.1), transparent)'
         }}
       />
-      
+
       <div className="relative max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-24">
         {/* Main Hero Content */}
         <div className="text-center">
@@ -62,26 +62,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSignUp, onSignIn }) 
             Discover Your Next
             <span className="block text-primary mt-1 sm:mt-2">Technical Read</span>
           </h1>
-          
+
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-3 sm:mb-4 px-2">
-            A curated library of 300+ high-quality, personally vetted resources. 
-            Sign in to unlock powerful search and filtering tools.
+            Explore 300+ ML, AI, and engineering resources. Personally vetted, beautifully organized, completely free.
           </p>
-          
+
           {/* Newsletter Mention */}
           <div className="mb-6 sm:mb-8 max-w-xl mx-auto px-2">
             <div className="p-3 sm:p-4 rounded-lg border bg-card/50 backdrop-blur-sm">
               <p className="text-xs sm:text-sm text-center text-muted-foreground">
-                <span className="font-semibold text-foreground">Bonus:</span> Sign up and get access to our{' '}
-                <a 
-                  href="https://datapecharcha.substack.com/" 
-                  target="_blank" 
+                <span className="font-semibold text-foreground">Bonus:</span> Get our{' '}
+                <a
+                  href="https://datapecharcha.substack.com/"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="font-semibold text-primary hover:underline"
                 >
-                  free high-value newsletter
+                  weekly newsletter
                 </a>
-                {' '}with curated insights and updates
+                {' '}with curated insights, new resources, and updates
               </p>
             </div>
           </div>

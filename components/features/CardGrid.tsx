@@ -60,8 +60,8 @@ export const CardGrid: React.FC<CardGridProps> = ({ resources, searchQuery, isLo
       <div className="text-center py-8 sm:py-12 px-3">
         <p className="text-muted-foreground text-base sm:text-lg">No resources found</p>
         <p className="text-muted-foreground text-xs sm:text-sm mt-2">
-          {searchQuery 
-            ? 'Try adjusting your search or filters' 
+          {searchQuery
+            ? 'Try adjusting your search or filters'
             : 'No data available in the database. Please check:'}
         </p>
         {!searchQuery && (
@@ -77,7 +77,7 @@ export const CardGrid: React.FC<CardGridProps> = ({ resources, searchQuery, isLo
 
   if (viewMode === 'list') {
     return (
-      <div className="space-y-3">
+      <div className="space-y-3 gpu-accelerated">
         {visibleResources.map((resource, index) => (
           <div
             key={resource.id}
@@ -94,7 +94,7 @@ export const CardGrid: React.FC<CardGridProps> = ({ resources, searchQuery, isLo
             />
           </div>
         ))}
-        
+
         {/* Load more trigger */}
         {hasMore && (
           <div ref={loadMoreRef} className="py-8 text-center">
@@ -116,7 +116,7 @@ export const CardGrid: React.FC<CardGridProps> = ({ resources, searchQuery, isLo
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-7 md:gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-7 md:gap-8 gpu-accelerated">
         {visibleResources.map((resource, index) => (
           <div
             key={resource.id}
@@ -134,7 +134,7 @@ export const CardGrid: React.FC<CardGridProps> = ({ resources, searchQuery, isLo
           </div>
         ))}
       </div>
-      
+
       {/* Load more trigger */}
       {hasMore && (
         <div ref={loadMoreRef} className="py-8 text-center">

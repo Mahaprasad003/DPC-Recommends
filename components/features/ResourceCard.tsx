@@ -31,7 +31,7 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
 
   const handleBookmarkClick = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    
+
     if (!isAuthenticated) {
       return;
     }
@@ -62,10 +62,10 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
 
   const highlightText = (text: string, query?: string) => {
     if (!query || !text) return text;
-    
+
     const regex = new RegExp(`(${query})`, 'gi');
     const parts = text.split(regex);
-    
+
     return parts.map((part, index) =>
       regex.test(part) ? (
         <mark key={index} className="bg-yellow-200 dark:bg-yellow-900">
@@ -100,7 +100,7 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
             <h3 className="font-semibold text-base sm:text-lg group-hover:text-primary transition-colors pr-8 sm:pr-0">
               {searchQuery ? highlightText(resource.title, searchQuery) : resource.title}
             </h3>
-            
+
             {/* Metadata row - Hidden on mobile, shown on sm+ */}
             <div className="hidden sm:flex sm:flex-wrap items-center gap-3 text-xs text-muted-foreground">
               {resource.source && (
@@ -129,19 +129,18 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
             <div className="flex flex-wrap items-center gap-1.5">
               {/* Difficulty */}
               {resource.difficulty && (
-                <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium border ${
-                  getDifficultyColor(resource.difficulty) === 'success'
-                    ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800'
-                    : getDifficultyColor(resource.difficulty) === 'warning'
+                <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium border ${getDifficultyColor(resource.difficulty) === 'success'
+                  ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800'
+                  : getDifficultyColor(resource.difficulty) === 'warning'
                     ? 'bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 border-amber-300 dark:border-amber-800'
                     : getDifficultyColor(resource.difficulty) === 'danger'
-                    ? 'bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border-rose-300 dark:border-rose-800'
-                    : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700'
-                }`}>
+                      ? 'bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border-rose-300 dark:border-rose-800'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700'
+                  }`}>
                   {capitalize(resource.difficulty)}
                 </span>
               )}
-              
+
               {/* Tag Subcategories - Show fewer on mobile */}
               {resource.tag_subcategories && Array.isArray(resource.tag_subcategories) && resource.tag_subcategories.length > 0 && (
                 <>
@@ -195,14 +194,13 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
                 flex items-center justify-center
                 rounded-full
                 transition-all duration-300 transform
-                ${
-                  bookmarked
-                    ? 'bg-primary/90 hover:bg-primary text-primary-foreground scale-100'
-                    : 'bg-white/90 dark:bg-gray-800/90 text-gray-600 dark:text-gray-400 hover:scale-110 hover:text-primary active:scale-95'
+                ${bookmarked
+                  ? 'bg-primary/90 hover:bg-primary text-primary-foreground scale-100'
+                  : 'bg-white/90 dark:bg-gray-800/90 text-gray-600 dark:text-gray-400 hover:scale-110 hover:text-primary active:scale-95'
                 }
-                ${ showConfirmation ? 'scale-125' : '' }
-                backdrop-blur-sm shadow-md hover:shadow-lg
-                border ${ bookmarked ? 'border-primary/50' : 'border-gray-200 dark:border-gray-700' }
+                ${showConfirmation ? 'scale-125' : ''}
+                shadow-md hover:shadow-lg
+                border ${bookmarked ? 'border-primary/50' : 'border-gray-200 dark:border-gray-700'}
                 touch-manipulation
               `}
               aria-label={bookmarked ? 'Remove bookmark' : 'Add bookmark'}
@@ -211,7 +209,7 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
               {showConfirmation ? (
                 <Check className="w-4 h-4 animate-pulse" />
               ) : (
-                <Bookmark className={`w-4 h-4 transition-all ${ bookmarked ? 'fill-current' : '' }`} />
+                <Bookmark className={`w-4 h-4 transition-all ${bookmarked ? 'fill-current' : ''}`} />
               )}
             </button>
           )}
@@ -223,7 +221,7 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
   // Grid view layout (default)
   return (
     <Card
-      className="h-full cursor-pointer transition-all hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] group relative flex flex-col"
+      className="h-full cursor-pointer transition-shadow hover:shadow-lg group relative flex flex-col"
       onClick={handleCardClick}
     >
       {/* Bookmark Button - Top Right Corner */}
@@ -237,11 +235,11 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
             rounded-full
             transition-all duration-300 transform
             ${bookmarked
-              ? 'bg-primary/90 hover:bg-primary text-primary-foreground scale-100' 
+              ? 'bg-primary/90 hover:bg-primary text-primary-foreground scale-100'
               : 'bg-white/90 dark:bg-gray-800/90 text-gray-600 dark:text-gray-400 hover:scale-110 hover:text-primary active:scale-95'
             }
             ${showConfirmation ? 'scale-125' : ''}
-            backdrop-blur-sm shadow-md hover:shadow-lg
+            shadow-md hover:shadow-lg
             border ${bookmarked ? 'border-primary/50' : 'border-gray-200 dark:border-gray-700'}
             touch-manipulation
           `}
@@ -251,30 +249,30 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
           {showConfirmation ? (
             <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-pulse" />
           ) : (
-            <Bookmark 
+            <Bookmark
               className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-all ${bookmarked ? 'fill-current' : ''}`}
             />
           )}
         </button>
       )}
-      
+
       <CardHeader className="pb-2 px-3 sm:px-4 pt-3 sm:pt-4 pr-11 sm:pr-12">
-        <h3 
+        <h3
           className="text-sm sm:text-base font-semibold line-clamp-2 sm:line-clamp-3 group-hover:text-primary transition-colors leading-tight sm:leading-snug"
           title={resource.title}
         >
           {searchQuery ? highlightText(resource.title, searchQuery) : resource.title}
         </h3>
       </CardHeader>
-      
+
       <CardContent className="space-y-2 px-3 sm:px-4 pb-3 sm:pb-4 flex-1 flex flex-col pr-11 sm:pr-4">
         {/* URL */}
         {resource.url && (
           <div className="flex items-start gap-1.5 text-xs text-muted-foreground">
             <ExternalLink className="w-3 h-3 flex-shrink-0 mt-0.5" />
-            <a 
-              href={ensureProtocol(resource.url)} 
-              target="_blank" 
+            <a
+              href={ensureProtocol(resource.url)}
+              target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 dark:text-blue-400 hover:underline break-all line-clamp-1 min-w-0 touch-manipulation"
               onClick={(e) => e.stopPropagation()}
@@ -299,44 +297,43 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, searchQuer
           {/* Difficulty */}
           {resource.difficulty && (
             <div>
-              <span className={`inline-flex items-center px-2 py-0.5 rounded text-[11px] sm:text-xs font-medium border ${
-                getDifficultyColor(resource.difficulty) === 'success' 
-                  ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800'
-                  : getDifficultyColor(resource.difficulty) === 'warning'
+              <span className={`inline-flex items-center px-2 py-0.5 rounded text-[11px] sm:text-xs font-medium border ${getDifficultyColor(resource.difficulty) === 'success'
+                ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800'
+                : getDifficultyColor(resource.difficulty) === 'warning'
                   ? 'bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 border-amber-300 dark:border-amber-800'
                   : getDifficultyColor(resource.difficulty) === 'danger'
-                  ? 'bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border-rose-300 dark:border-rose-800'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700'
-              }`}>
+                    ? 'bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border-rose-300 dark:border-rose-800'
+                    : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700'
+                }`}>
                 {capitalize(resource.difficulty)}
               </span>
             </div>
           )}
 
           {/* Tag Subcategories */}
-          {resource.tag_subcategories && 
-           Array.isArray(resource.tag_subcategories) && 
-           resource.tag_subcategories.length > 0 && (
-            <div className="flex flex-wrap gap-1.5">
-              {resource.tag_subcategories.slice(0, 3).map((subcategory, index) => (
-                <span
-                  key={index}
-                  className="inline-flex items-center px-2 py-0.5 rounded text-[11px] sm:text-xs font-medium bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-300 dark:border-blue-800"
-                  title={String(subcategory)}
-                >
-                  {String(subcategory)}
-                </span>
-              ))}
-              {resource.tag_subcategories.length > 3 && (
-                <span 
-                  className="inline-flex items-center px-2 py-0.5 rounded text-[11px] sm:text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 cursor-help"
-                  title={resource.tag_subcategories.slice(3).join(', ')}
-                >
-                  +{resource.tag_subcategories.length - 3}
-                </span>
-              )}
-            </div>
-          )}
+          {resource.tag_subcategories &&
+            Array.isArray(resource.tag_subcategories) &&
+            resource.tag_subcategories.length > 0 && (
+              <div className="flex flex-wrap gap-1.5">
+                {resource.tag_subcategories.slice(0, 3).map((subcategory, index) => (
+                  <span
+                    key={index}
+                    className="inline-flex items-center px-2 py-0.5 rounded text-[11px] sm:text-xs font-medium bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-300 dark:border-blue-800"
+                    title={String(subcategory)}
+                  >
+                    {String(subcategory)}
+                  </span>
+                ))}
+                {resource.tag_subcategories.length > 3 && (
+                  <span
+                    className="inline-flex items-center px-2 py-0.5 rounded text-[11px] sm:text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 cursor-help"
+                    title={resource.tag_subcategories.slice(3).join(', ')}
+                  >
+                    +{resource.tag_subcategories.length - 3}
+                  </span>
+                )}
+              </div>
+            )}
         </div>
       </CardContent>
     </Card>

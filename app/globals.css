@@ -53,60 +53,85 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
-  
+
   /* Improve touch targets on mobile */
   @media (max-width: 640px) {
-    button, a, input, select, textarea {
+
+    button,
+    a,
+    input,
+    select,
+    textarea {
       min-height: 44px;
       min-width: 44px;
     }
   }
-  
+
   /* Prevent text size adjustment on mobile */
   html {
     -webkit-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
   }
-  
+
   /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
   }
-  
+
   /* Better font rendering */
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   /* Hide scrollbar for horizontal scroll on mobile */
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
-  
+
   /* Fade in animation for lazy loaded cards */
   @keyframes fadeIn {
     from {
       opacity: 0;
       transform: translateY(20px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
-  
+
   .animate-fadeIn {
     animation: fadeIn 0.5s ease-out;
   }
 }
 
+/* Performance optimizations for smooth scrolling */
+@layer utilities {
+
+  /* GPU acceleration for card grids */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+}
+
+/* Optimize card hover transitions */
+@layer components {
+
+  /* Cards should only repaint shadow on hover, not transform */
+  [class*="hover:shadow"] {
+    will-change: box-shadow;
+  }
+}

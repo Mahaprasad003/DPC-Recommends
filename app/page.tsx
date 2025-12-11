@@ -95,9 +95,9 @@ export default function HomePage() {
         {/* Sneak Peek Section */}
         <div className="space-y-4 sm:space-y-6">
           <div className="text-center px-2">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1.5 sm:mb-2">Sneak Peek</h2>
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1.5 sm:mb-2">See What&apos;s Inside</h2>
             <p className="text-xs sm:text-sm md:text-base text-muted-foreground">
-              Here&apos;s a preview of what you&apos;ll get access to after signing in
+              A taste of the curated resources waiting for you
             </p>
           </div>
 
@@ -105,8 +105,7 @@ export default function HomePage() {
           <div className="max-w-3xl mx-auto px-2">
             <div className="p-3 sm:p-4 md:p-6 rounded-lg border bg-card/50 backdrop-blur-sm">
               <p className="text-center text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed">
-                <span className="font-semibold text-foreground">Comprehensive coverage:</span> Classical ML, Deep Learning, Agents, LLMs, MCP, and much more from{' '}
-                <span className="font-semibold text-foreground">well-reputed sources</span>
+                Resources from <span className="font-semibold text-foreground">Stanford, DeepLearning.AI, Andrej Karpathy, Sebastian Raschka, Chip Huyen</span> and more. Covering Classical ML, Deep Learning, LLMs, Agents, and MLOps
               </p>
             </div>
           </div>
@@ -114,7 +113,7 @@ export default function HomePage() {
           {/* Results Count */}
           {!sneakPeekLoading && sneakPeekContent && (
             <div className="text-xs sm:text-sm text-muted-foreground text-center">
-              Showing {sneakPeekContent.length} resource{sneakPeekContent.length !== 1 ? 's' : ''} (300+ available after sign in)
+              Browsing {sneakPeekContent.length} of <span className="font-medium text-foreground">300+</span> resources — sign in to unlock everything
             </div>
           )}
 
@@ -143,9 +142,9 @@ export default function HomePage() {
             </p>
             <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3 md:mb-4">
               Plus get access to our{' '}
-              <a 
-                href="https://datapecharcha.substack.com/" 
-                target="_blank" 
+              <a
+                href="https://datapecharcha.substack.com/"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="font-semibold text-primary hover:underline"
               >
@@ -198,7 +197,7 @@ export default function HomePage() {
               Showing {resources.length} resource{resources.length !== 1 ? 's' : ''}
             </p>
           )}
-          
+
           {/* View Toggle and Sort Controls */}
           <div className="flex items-center gap-2 sm:gap-3">
             {/* View Mode Toggle */}
@@ -236,7 +235,7 @@ export default function HomePage() {
                 <span className="hidden sm:inline">List</span>
               </button>
             </div>
-            
+
             {/* Sort Controls */}
             <label htmlFor="sort-by" className="text-xs sm:text-sm font-medium whitespace-nowrap">
               Sort by:
@@ -254,9 +253,9 @@ export default function HomePage() {
               <option value="title">Title</option>
               <option value="difficulty">Difficulty</option>
             </Select>
-            <Button 
-              variant="outline" 
-              onClick={toggleSortOrder} 
+            <Button
+              variant="outline"
+              onClick={toggleSortOrder}
               className="h-9 sm:h-10 px-2 sm:px-3 touch-manipulation"
               aria-label={`Sort order: ${sortOrder === 'asc' ? 'Ascending' : 'Descending'}`}
             >
