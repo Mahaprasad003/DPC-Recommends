@@ -457,7 +457,7 @@ npm start
 ## 🧪 Testing & Verification
 
 ### Database Connection Test
-Visit `/test-db` to verify:
+Use the `/api/verify` endpoint to verify:
 - ✓ Supabase connection
 - ✓ Table existence
 - ✓ RLS policies
@@ -512,7 +512,7 @@ Key features enabled in `next.config.js`:
 **❌ No data showing (0 resources)**
 - **Cause**: RLS policies blocking access
 - **Fix**: Run the RLS policy SQL from setup section
-- **Verify**: Check `/test-db` endpoint
+- **Verify**: Check `/api/verify` endpoint
 
 **❌ Authentication not working**
 - **Cause**: Incorrect Supabase URL/keys

@@ -68,7 +68,7 @@ export const CardGrid: React.FC<CardGridProps> = ({ resources, searchQuery, isLo
           <ul className="text-left text-xs sm:text-sm text-muted-foreground mt-4 max-w-md mx-auto space-y-2">
             <li>• Verify data exists in the technical_content table</li>
             <li>• Check RLS policies allow public read access</li>
-            <li>• Visit /test-db to debug the connection</li>
+            <li>• Check browser console for connection errors</li>
           </ul>
         )}
       </div>
