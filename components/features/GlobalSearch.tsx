@@ -24,7 +24,7 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({ isOpen, onClose, sco
 
   // Use bookmarks or all resources based on scope
   const isLoading = scopeToBookmarks ? bookmarksLoading : resourcesLoading;
-  const searchableResources: Resource[] = scopeToBookmarks 
+  const searchableResources: Resource[] = scopeToBookmarks
     ? bookmarks.map(b => b.resource).filter(Boolean) as Resource[]
     : resources;
 
@@ -65,20 +65,20 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({ isOpen, onClose, sco
   const filteredResources = React.useMemo(() => {
     return searchQuery.trim()
       ? searchableResources.filter((resource: Resource) => {
-          const query = searchQuery.toLowerCase();
-          const takeaways = Array.isArray(resource.key_takeaways) ? resource.key_takeaways : [];
-          const categories = Array.isArray(resource.tag_categories) ? resource.tag_categories : [];
-          const subcategories = Array.isArray(resource.tag_subcategories) ? resource.tag_subcategories : [];
-          
-          return (
-            resource.title?.toLowerCase().includes(query) ||
-            resource.author?.toLowerCase().includes(query) ||
-            resource.source?.toLowerCase().includes(query) ||
-            takeaways.some((takeaway: string) => takeaway.toLowerCase().includes(query)) ||
-            categories.some((cat: string) => cat.toLowerCase().includes(query)) ||
-            subcategories.some((subcat: string) => subcat.toLowerCase().includes(query))
-          );
-        }).slice(0, 10) // Limit to 10 results
+        const query = searchQuery.toLowerCase();
+        const takeaways = Array.isArray(resource.key_takeaways) ? resource.key_takeaways : [];
+        const categories = Array.isArray(resource.tag_categories) ? resource.tag_categories : [];
+        const subcategories = Array.isArray(resource.tag_subcategories) ? resource.tag_subcategories : [];
+
+        return (
+          resource.title?.toLowerCase().includes(query) ||
+          resource.author?.toLowerCase().includes(query) ||
+          resource.source?.toLowerCase().includes(query) ||
+          takeaways.some((takeaway: string) => takeaway.toLowerCase().includes(query)) ||
+          categories.some((cat: string) => cat.toLowerCase().includes(query)) ||
+          subcategories.some((subcat: string) => subcat.toLowerCase().includes(query))
+        );
+      }).slice(0, 10) // Limit to 10 results
       : [];
   }, [searchQuery, searchableResources]);
 
@@ -195,17 +195,15 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({ isOpen, onClose, sco
                   key={resource.id}
                   data-result-index={index}
                   onClick={() => handleResourceClick(resource)}
-                  className={`w-full p-3 sm:p-4 transition-colors text-left group touch-manipulation ${
-                    index === selectedIndex 
-                      ? 'bg-accent border-l-2 border-l-primary' 
-                      : 'bg-background hover:bg-accent active:bg-accent'
-                  }`}
+                  className={`w-full p-3 sm:p-4 transition-colors text-left group touch-manipulation ${index === selectedIndex
+                      ? 'bg-muted/50 border-l-2 border-l-primary'
+                      : 'bg-background hover:bg-muted/30 active:bg-muted/50'
+                    }`}
                 >
                   <div className="flex items-start justify-between gap-2 sm:gap-4">
                     <div className="flex-1 min-w-0">
-                      <h3 className={`text-sm sm:text-base font-semibold mb-1 transition-colors truncate ${
-                        index === selectedIndex ? 'text-primary' : 'text-foreground group-hover:text-primary'
-                      }`}>
+                      <h3 className={`text-sm sm:text-base font-semibold mb-1 transition-colors truncate ${index === selectedIndex ? 'text-primary' : 'text-foreground group-hover:text-primary'
+                        }`}>
                         {resource.title}
                       </h3>
                       {resource.author && (
@@ -215,22 +213,21 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({ isOpen, onClose, sco
                       )}
                       <div className="flex flex-wrap gap-1.5 sm:gap-2">
                         {resource.tag_subcategories && resource.tag_subcategories.length > 0 && (
-                          <span className="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 bg-primary/10 text-primary rounded-full">
+                          <span className="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 bg-secondary text-secondary-foreground rounded-full">
                             {resource.tag_subcategories[0]}
                           </span>
                         )}
                         {resource.difficulty && (
-                          <span className="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 bg-secondary text-secondary-foreground rounded-full">
+                          <span className="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 bg-muted text-muted-foreground rounded-full">
                             {resource.difficulty}
                           </span>
                         )}
                       </div>
                     </div>
-                    <ArrowRight className={`w-4 h-4 sm:w-5 sm:h-5 transition-all flex-shrink-0 ${
-                      index === selectedIndex 
-                        ? 'text-primary translate-x-1' 
-                        : 'text-muted-foreground group-hover:text-primary group-hover:translate-x-1'
-                    }`} />
+                    <ArrowRight className={`w-4 h-4 sm:w-5 sm:h-5 transition-all flex-shrink-0 ${index === selectedIndex
+                      ? 'text-primary translate-x-1'
+                      : 'text-muted-foreground group-hover:text-primary group-hover:translate-x-1'
+                      }`} />
                   </div>
                 </button>
               ))}
