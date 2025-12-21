@@ -17,10 +17,32 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'DPC Recommends',
-  description: 'A curated collection of recommended resources',
+  description: 'Discover handpicked resources curated by DPC — your go-to collection for learning, building, and growing. Tools, articles, and inspiration all in one place.',
   icons: {
-    icon: '/favicon.png',
-    apple: '/favicon.png',
+    icon: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
+  openGraph: {
+    title: 'DPC Recommends',
+    description: 'Discover handpicked resources — your go-to collection for learning, building, and growing. Tools, articles, and inspiration all in one place.',
+    url: 'https://dpc-recommends.vercel.app',
+    siteName: 'DPC Recommends',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'DPC Recommends - Curated Resources',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'DPC Recommends',
+    description: 'Discover handpicked resources — your go-to collection for learning, building, and growing.',
+    images: ['/og-image.png'],
   },
 };
 
